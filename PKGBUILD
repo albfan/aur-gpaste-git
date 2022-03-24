@@ -4,7 +4,7 @@
 
 pkgname=gpaste-git
 pkgver=42.1+14+gfd41f430
-pkgrel=1
+pkgrel=2
 pkgdesc="Clipboard management system"
 url="http://www.imagination-land.org/tags/GPaste.html"
 license=(GPL3)
@@ -23,17 +23,17 @@ pkgver() {
   git describe --tags | sed 's/^v//;s/-/+/g'
 }
 
-build() {
+prepare() {
   cd $pkgname
-  mkdir builddir
-  cd builddir
-  meson \
-    --prefix='/usr' ..
-  ninja
+}
+
+
+build() {
+  arch-meson $pkgname build
+  meson compile -C build
 }
 
 package() {
-  cd $pkgname
-  cd builddir
-  DESTDIR="$pkgdir" ninja install
+  meson install -C build --destdir "$pkgdir"
+  install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 $pkgname/COPYING
 }
