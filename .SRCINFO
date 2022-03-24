@@ -1,7 +1,7 @@
 pkgbase = gpaste-git
 	pkgdesc = Clipboard management system
 	pkgver = 42.1+14+gfd41f430
-	pkgrel = 2
+	pkgrel = 3
 	url = http://www.imagination-land.org/tags/GPaste.html
 	arch = i686
 	arch = x86_64

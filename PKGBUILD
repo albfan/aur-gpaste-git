@@ -4,7 +4,7 @@
 
 pkgname=gpaste-git
 pkgver=42.1+14+gfd41f430
-pkgrel=2
+pkgrel=3
 pkgdesc="Clipboard management system"
 url="http://www.imagination-land.org/tags/GPaste.html"
 license=(GPL3)
@@ -31,6 +31,10 @@ prepare() {
 build() {
   arch-meson $pkgname build
   meson compile -C build
+}
+
+check() {
+  meson test -C build --print-errorlogs
 }
 
 package() {
